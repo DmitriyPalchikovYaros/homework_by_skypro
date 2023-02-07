@@ -42,7 +42,7 @@ if user_command == 'ready':
     for user_question in questions:
         print(user_question)
         count_answers += 1
-        go = 3
+        
 
         # Создаем новый цикл для подсчета попыток
         while True:
