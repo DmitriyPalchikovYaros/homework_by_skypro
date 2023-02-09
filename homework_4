@@ -1,0 +1,85 @@
+# Создать 3 словаря easy, medium, hard по 5 пар слов
+easy = {
+    'cat': 'кошка',
+    'dog': 'собака',
+    'pig': 'свинка',
+    'human': 'человек',
+    'horse': 'лошадь'
+}
+
+medium = {
+    'chair': 'стул',
+    'table': 'стол',
+    'car': 'автомобиль',
+    'shovel': 'лопата',
+    'closet': 'шкаф'
+}
+
+hard = {
+    'kitchen': 'кухня',
+    'phone': 'телефон',
+    'laptop': 'ноутбук',
+    'neighbour': 'сосед',
+    'capital': 'столица'
+}
+# Создать словарь levels
+levels = {
+    0: 'Нулевой',
+    1: 'Так себе',
+    2: 'Можно лучше',
+    3: 'Норм',
+    4: 'Хорошо',
+    5: 'Отлично'
+}
+
+# Создайте словарь answers в нем будут храниться правильные и неправильные слова
+answers = {}
+
+# Получить от пользователя уровень сложности и записать его в словарь words
+print('Выберите уровень сложности\n'
+      'Легкий, Средний, Сложный')
+user_lewels = input('Введите значение: ')
+
+words = {}
+
+if user_lewels == 'Легкий':
+    words = easy
+elif user_lewels == 'Средний':
+    words = medium
+elif user_lewels == 'Сложный':
+    words = hard
+
+
+print(f'Выбран уровень сложности, мы предложим 5 слов, подберите перевод')
+user_enter = input('нажмите Enter')
+
+# Перебрать полученный словарь, задать вопросы и записать ответы в словарь answers 
+for key, value in words.items():
+    len_value = int(len(words[key]))
+    first_letter = value[0]
+    print(f'{key}, {len_value} букв, начинается на {first_letter}...')
+    user_answer = input('Введите слово: ')
+
+    if user_answer == value:
+        print(f'Верно, {key.capitalize()} это {value}')
+        answers[key] = True
+
+    elif user_answer != value:
+        print(f'Неверно. {key.capitalize()} это {value}')
+        answers[key] = False
+
+count = 0
+
+# Сравнить ответы и подсчитать количество правильных ответов. Присвоить ранг пользователю
+print('Правильно отвеченные слова: ')
+for i, v in answers.items():
+    if v == True:
+        print(i)
+        count += 1
+print('Неправильно отвеченные слова: ')
+for a, b in answers.items():
+    if b == False:
+        print(a)
+
+
+print(f'Ваш ранг: {levels[count]}')
