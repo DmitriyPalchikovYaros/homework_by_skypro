@@ -1,0 +1,108 @@
+import random
+
+word_list = ['code', 'bit', 'soul', 'letter', 'phone']
+answers = []
+
+dict_morse = {
+  "0": "-----",
+  "1": ".----",
+  "2": "..---",
+  "3": "...--",
+  "4": "....-",
+  "5": ".....",
+  "6": "-....",
+  "7": "--...",
+  "8": "---..",
+  "9": "----.",
+  "a": ".-",
+  "b": "-...",
+  "c": "-.-.",
+  "d": "-..",
+  "e": ".",
+  "f": "..-.",
+  "g": "--",
+  "h": "....",
+  "я": "..",
+  "j": ".---",
+  "k": "-.-",
+  "l": ".-..",
+  "m": "--",
+  "n": "-",
+  "o": "---",
+  "p": ".--.",
+  "q": "--.-",
+  "r": ".-.",
+  "s": "...",
+  "t": "-",
+  "u": "..-",
+  "v": "...-",
+  "w": ".--",
+  "x": "-..-",
+  "y": "-.--",
+  "z": "--..",
+  ".": ".-.-.-",
+  ",": "--..--",
+  "?": "..--..",
+  "!": "-.-.--",
+  "-": "-....-",
+  "/": "-..-.",
+  "@": ".--.-.",
+  "(": "-.--.",
+  ")": "-.--.-"
+}
+# Функция переводит слово в азбуку морзе
+def word_encoder (sentence):
+    sentence_list = list(sentence)
+    word = ''
+    for i in sentence_list:
+        for k, v in dict_morse.items():
+            if i == k:
+                word += v
+    return word
+
+
+# Функция выдает случайное значение из списка
+def get_word (user_lict):
+    random_word = random.sample(user_lict, 1)[0]
+    return random_word
+
+
+# Функция выводит подсчет правильных и неправильных ответов
+def print_statistic (answers):
+    count_correct = 0
+    count_uncorrect = 0
+    all_answers = len(answers)
+    for i in answers:
+        if i == True:
+            count_correct +=1
+        else:
+            count_uncorrect +=1
+    return print(f'Всего задачек: {all_answers}\n'
+                 f'Верных ответов: {count_correct}\n'
+                 f'Неверных ответов: {count_uncorrect}')
+
+# Основной код программы
+print('Сегодня мы потренируемся расшифровывать морзянку\n'
+      'Нажмите Enter и продолжим')
+input()
+
+count = 1
+
+# Перебираем список по его длине и подставляем функции, которые описаны выше. Просим пользователя ввести слово
+# если правильно, записываем ответ в список answers True, если нет False.
+sum_ = len(word_list) + 1
+for i in range(1, sum_):
+    word_random = get_word(word_list)
+    print(f'Слово {count}: {word_encoder(word_random)}')
+    count += 1
+
+    user_input = input('Введите слово: ')
+
+    if user_input == word_random:
+        answers.append(True)
+        print(f'Верно, {word_random}')
+    else:
+        answers.append(False)
+        print(f'Неверно, это {word_random}')
+
+print_statistic(answers)
