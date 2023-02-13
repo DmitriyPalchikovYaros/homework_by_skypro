@@ -90,8 +90,7 @@ count = 1
 
 # Перебираем список по его длине и подставляем функции, которые описаны выше. Просим пользователя ввести слово
 # если правильно, записываем ответ в список answers True, если нет False.
-sum_ = len(word_list) + 1
-for i in range(1, sum_):
+for i in range(len(word_list):
     word_random = get_word(word_list)
     print(f'Слово {count}: {word_encoder(word_random)}')
     count += 1
