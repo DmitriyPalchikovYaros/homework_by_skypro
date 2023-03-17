@@ -1,0 +1,64 @@
+import random
+
+
+def word_random(i):
+    with open('words.txt') as file:
+        word_list = file.read().split('\n')
+        return word_list[i]
+
+
+def user_top(name, points):
+    with open('user_top.txt', 'a') as file:
+        file.write(f'{name} {points}\n')
+
+
+def statistic_games():
+    with open('user_top.txt') as file:
+        games_num = len(file.readlines())
+    return games_num
+
+
+def statistic_summ():
+    count_summ = 0
+    with open('user_top.txt') as file:
+
+        for i in file:
+            date = i.split(' ')
+            date_sum = int(date[1])
+            if date_sum > count_summ:
+                count_summ = date_sum
+    return count_summ
+
+
+user_name = input('Введите Ваше имя: ')
+
+with open('words.txt') as file:
+    word_len = int(len(file.read().split('\n')))
+
+points_count = 0
+index = 0
+
+while word_len > 0:
+    word = word_random(index)
+    word_list = list(word_random(index))
+    random.shuffle(word_list)
+    word_rand_finally = ''.join(word_list)
+
+    print(f'Угадайте слово: {word_rand_finally}')
+    user_word = input('Ваш ответ: ')
+
+    if word == user_word:
+        print(f'Верно! Вы получили 10 очков.')
+        points_count += 10
+    else:
+        print(f'Неверно! Верный ответ {word}.')
+
+    index += 1
+    word_len -= 1
+
+print(f'Вы заработали {points_count} очков')
+
+user_top(user_name, points_count)
+
+print(f'Всего игр сыграно: {statistic_games()}\n'
+      f'Максимальный рекорд: {statistic_summ()}')
